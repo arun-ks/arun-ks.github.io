@@ -16,9 +16,9 @@ test("includes accessible theme control and social metadata", () => {
   assert.match(html, /property="og:image"/);
 });
 
-test("uses project-relative resume and asset links", () => {
-  assert.match(html, /\/arun-ks\/Arun-K-Sivanandan-CV\.pdf/);
-  assert.match(html, /\/arun-ks\/og\.png/);
+test("uses root-relative resume and asset links", () => {
+  assert.match(html, /\/Arun-K-Sivanandan-CV\.pdf/);
+  assert.match(html, /\/og\.png/);
 });
 
 test("selected impact is navigable and progressively discloses full project stories", () => {
