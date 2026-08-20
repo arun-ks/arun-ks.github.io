@@ -20,3 +20,12 @@ test("uses project-relative resume and asset links", () => {
   assert.match(html, /\/arun-ks\/Arun-K-Sivanandan-CV\.pdf/);
   assert.match(html, /\/arun-ks\/og\.png/);
 });
+
+test("selected impact is navigable and progressively discloses full project stories", () => {
+  assert.match(html, /href="#projects">Projects/);
+  assert.equal((html.match(/class="project-toggle"/g) || []).length, 4);
+  assert.equal((html.match(/class="project-details"/g) || []).length, 4);
+  assert.match(html, /astro-logo\.png/);
+  assert.match(html, /globe-telecom-logo\.png/);
+  assert.match(html, /amdocs-optima\.jpg/);
+});
