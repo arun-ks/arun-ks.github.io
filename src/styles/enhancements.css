@@ -1,0 +1,179 @@
+.role-details {
+  transition: grid-template-rows .4s ease, opacity .35s ease;
+}
+
+.role-details-inner {
+  overflow: hidden;
+}
+
+.details-label {
+  margin: 26px 0 0;
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.role-details ul {
+  margin: 16px 0 20px;
+  columns: 2;
+  column-gap: 42px;
+}
+
+.role-details li {
+  margin: 0 0 12px;
+  break-inside: avoid;
+}
+
+.portfolio-visual {
+  display: block;
+}
+
+.portfolio-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.portfolio-card:hover .portfolio-visual img {
+  transform: scale(1.025);
+}
+
+.cert-card li {
+  display: block;
+  padding: 0;
+}
+
+.cert-card li > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 9px 0;
+}
+
+.cert-card li > a:hover span {
+  color: var(--cyan);
+}
+
+.cert-card li b {
+  color: var(--cyan);
+  font-weight: 400;
+}
+
+@media (max-width: 700px) {
+  .role-details ul { columns: 1; }
+  .focus-card { right: 0; bottom: 5%; transform: scale(.88); transform-origin: right bottom; }
+  .company-logo { width: 44px; height: 44px; flex-basis: 44px; }
+}
+.portrait-frame {
+  position: relative;
+  z-index: 2;
+  width: 47%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 5px solid var(--surface-solid);
+  box-shadow: 0 0 0 1px var(--line), 0 24px 70px rgba(0,0,0,.28);
+  background: var(--surface-solid);
+}
+
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.focus-card {
+  position: absolute;
+  z-index: 4;
+  right: -2%;
+  bottom: 12%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 210px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb,var(--surface-solid) 92%,transparent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.focus-card > img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #050505;
+}
+
+.focus-card > span { display: flex; flex-direction: column; line-height: 1.25; }
+.focus-card small { color: var(--cyan); font-size: 7px; letter-spacing: .15em; }
+.focus-card strong { font: 600 11px "Manrope"; margin: 3px 0; }
+.focus-card em { color: var(--muted); font-size: 8px; font-style: normal; }
+
+.company-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.company-logo {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(0,0,0,.12);
+}
+
+.company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.role-title h3 a > span {
+  color: var(--cyan);
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.role-title h3 a:hover > span { opacity: 1; }
+
+.education-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.education-label > p { margin: 0; }
+
+.education-label > a {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(0,0,0,.1);
+}
+
+.education-label img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+}
