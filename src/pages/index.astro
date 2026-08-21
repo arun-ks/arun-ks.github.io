@@ -6,6 +6,8 @@ import posts from "../data/substack-posts.json";
 const base = import.meta.env.BASE_URL;
 const resumeUrl = `${base}Arun-K-Sivanandan-CV.pdf`;
 const ogUrl = new URL(`${base}og.png`, Astro.site);
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || "https://cloud.umami.is/script.js";
 const [featuredPost, ...secondaryPosts] = posts;
 ---
 <!doctype html>
@@ -24,6 +26,7 @@ const [featuredPost, ...secondaryPosts] = posts;
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>Arun K Sivanandan — Technology Leader</title>
     <script is:inline>(() => { const saved = localStorage.getItem("aks-theme"); const theme = saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; })();</script>
+    {umamiWebsiteId && <script is:inline defer src={umamiScriptUrl} data-website-id={umamiWebsiteId} data-domains="arun-ks.github.io" data-do-not-track="true" data-exclude-search="true"></script>}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
@@ -56,6 +59,20 @@ const [featuredPost, ...secondaryPosts] = posts;
       nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => { nav.classList.remove("open"); menu?.setAttribute("aria-expanded", "false"); }));
       document.querySelectorAll<HTMLButtonElement>(".role-toggle").forEach((button) => button.addEventListener("click", () => { const details = button.closest(".role-body")?.querySelector(".role-details"); const open = details?.classList.toggle("open") ?? false; const company = button.closest(".role-body")?.querySelector("h3")?.textContent || "this role"; button.textContent = open ? "−" : "+"; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", `${open ? "Hide" : "Show"} full details for ${company}`); }));
       document.querySelectorAll<HTMLButtonElement>(".project-toggle").forEach((button) => button.addEventListener("click", () => { const card = button.closest(".project-card"); const details = card?.querySelector(".project-details"); const open = details?.classList.toggle("open") ?? false; const project = card?.querySelector("h3")?.textContent || "this project"; const label = button.querySelector<HTMLElement>(".project-toggle-label"); const icon = button.querySelector<HTMLElement>(".project-toggle-icon"); if (label) label.textContent = open ? "Hide details" : "View details"; if (icon) icon.textContent = open ? "−" : "+"; button.setAttribute("aria-expanded", String(open)); button.setAttribute("aria-label", `${open ? "Hide" : "Show"} full project details for ${project}`); }));
+      document.addEventListener("click", (event) => {
+        const link = (event.target as Element).closest<HTMLAnchorElement>("a[href]"); if (!link) return;
+        const analytics = (window as Window & { umami?: { track: (name: string, data?: Record<string, string>) => void } }).umami;
+        if (!analytics) return;
+        const portfolioCard = link.closest<HTMLElement>(".portfolio-card");
+        let eventName = ""; let label = link.textContent?.trim() || "";
+        if (portfolioCard) { eventName = link.hostname === "github.com" ? "portfolio_repository_open" : "portfolio_live_open"; label = portfolioCard.querySelector("h3")?.textContent?.trim() || label; }
+        else if (link.pathname.endsWith("Arun-K-Sivanandan-CV.pdf")) eventName = "resume_download";
+        else if (link.protocol === "mailto:") eventName = "contact_email_click";
+        else if (link.hostname === "arun-ks.github.io" && link.pathname.startsWith("/cert")) eventName = "certificate_catalogue_open";
+        else if (link.hostname === "arunk5.substack.com" && link.pathname.startsWith("/p/")) eventName = "substack_article_open";
+        else if (link.hostname === "github.com" && link.pathname.replace(/\/$/, "") === "/arun-ks") eventName = "github_profile_open";
+        if (eventName) analytics.track(eventName, label ? { label } : undefined);
+      });
       const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")), { threshold: .08 }); document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
     </script>
   </body>

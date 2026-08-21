@@ -48,3 +48,17 @@ test("renders cached Substack articles with images and no publication dates", ()
   assert.doesNotMatch(html, /<time|pubDate|post\.date/);
   assert.match(html, /Latest article/);
 });
+
+test("includes anonymous analytics event hooks", () => {
+  for (const event of [
+    "resume_download",
+    "contact_email_click",
+    "certificate_catalogue_open",
+    "substack_article_open",
+    "github_profile_open",
+    "portfolio_live_open",
+    "portfolio_repository_open",
+  ]) {
+    assert.match(html, new RegExp(event));
+  }
+});
