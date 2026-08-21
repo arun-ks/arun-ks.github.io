@@ -29,3 +29,11 @@ test("selected impact is navigable and progressively discloses full project stor
   assert.match(html, /globe-telecom-logo\.png/);
   assert.match(html, /amdocs-optima\.jpg/);
 });
+
+test("renders twelve compact portfolio cards with local representative visuals", () => {
+  assert.equal((html.match(/class="portfolio-card reveal"/g) || []).length, 12);
+  assert.equal((html.match(/\/portfolio\/[^"]+\.png/g) || []).length, 12);
+  assert.match(html, /github\.com\/arun-ks\/AutoJoinTeamsZoom/);
+  assert.equal((html.match(/class="portfolio-live"/g) || []).length, 8);
+  assert.match(html, /arun-ks\.github\.io\/CorporateBingo\//);
+});

@@ -123,12 +123,18 @@ export const projects = [
 ];
 
 export const portfolio = [
-  { name: "Multiple News Live", description: "A focused web interface for watching multiple live news streams simultaneously.", language: "TypeScript", href: "https://github.com/arun-ks/multiple-news-live", accent: "01" },
-  { name: "YouTuber Tracker", description: "A TypeScript application for tracking and exploring YouTube channel activity.", language: "TypeScript", href: "https://github.com/arun-ks/YouTuberTracker", live: "https://you-tuber-tracker.vercel.app", accent: "02" },
-  { name: "Job Hunt Visualized", description: "A data-led visualisation of the job-search pipeline, turning application history into readable insight.", language: "Data visualisation", href: "https://github.com/arun-ks/JobHuntVisualized", accent: "03" },
-  { name: "Physio Exercise Guide", description: "A digital prescription tracker designed to make physiotherapy exercises easier to follow and manage.", language: "Web app", href: "https://github.com/arun-ks/physio-exercise-guide", accent: "04" },
-  { name: "Toddler Games", description: "A collection of playful, touch-friendly interactive games built for toddlers.", language: "JavaScript", href: "https://github.com/arun-ks/ToddlerGames", live: "https://arun-ks.github.io/ToddlerGames/", accent: "05" },
-  { name: "Malayalam Transliterator", description: "A reading aid that reveals transliteration on hover to make Malayalam text more approachable.", language: "HTML", href: "https://github.com/arun-ks/TransliterateMalayalam", accent: "06" },
+  { name: "Multiple News Live", description: "Watch several live news channels together in one focused interface.", language: "JavaScript", href: "https://github.com/arun-ks/multiple-news-live", live: "https://arun-ks.github.io/multiple-news-live/", image: "portfolio/multiple-news-live.png" },
+  { name: "YouTuber Tracker", description: "Track YouTube channels and turn creator activity into useful signals.", language: "TypeScript", href: "https://github.com/arun-ks/YouTuberTracker", live: "https://you-tuber-tracker.vercel.app", image: "portfolio/youtube-tracker.png" },
+  { name: "KTM Tracker", description: "An exploratory utility for keeping track of KTM Komuter trains.", language: "Web utility", href: "https://github.com/arun-ks/KTM", live: "https://arun-ks.github.io/KTM/", image: "portfolio/ktm-tracker.png" },
+  { name: "Job Hunt Visualized", description: "Turn a job-search pipeline into a clear, readable data story.", language: "Data visualisation", href: "https://github.com/arun-ks/JobHuntVisualized", live: "https://arun-ks.github.io/JobHuntVisualized/dist/index.html", image: "portfolio/job-hunt-visualized.png" },
+  { name: "WhatsApp Non-Contact Message", description: "Send a message to a phone number without first saving a contact.", language: "Web utility", href: "https://github.com/arun-ks/WhatsAppNonContactMesg", live: "https://arun-ks.github.io/WhatsAppNonContactMesg/", image: "portfolio/whatsapp-non-contact.png" },
+  { name: "Doomsday Algorithm", description: "Practise calculating the weekday for almost any date mentally.", language: "Learning tool", href: "https://github.com/arun-ks/DoomsdayAlgorithm", live: "https://arun-ks.github.io/DoomsdayAlgorithm/", image: "portfolio/doomsday-algorithm.png" },
+  { name: "Toddler Games", description: "Playful, touch-friendly interactive games designed for toddlers.", language: "JavaScript", href: "https://github.com/arun-ks/ToddlerGames", live: "https://arun-ks.github.io/ToddlerGames/", image: "portfolio/toddler-games.png" },
+  { name: "Screen Saver Saver", description: "Keep a computer awake by preventing its screen saver from activating.", language: "Desktop utility", href: "https://github.com/arun-ks/ScreenSaverSaver", image: "portfolio/screen-saver-saver.png" },
+  { name: "Malaysia 4D Analysis", description: "Explore the statistical distribution of historical Malaysian 4D results.", language: "Data analysis", href: "https://github.com/arun-ks/Malaysia-4DMagnumAnalysis", image: "portfolio/malaysia-4d-analysis.png" },
+  { name: "Gamify Life", description: "Use activity logs and game mechanics to motivate personal progress.", language: "Productivity", href: "https://github.com/arun-ks/GamifyLife", image: "portfolio/gamify-life.png" },
+  { name: "Corporate Bingo", description: "A light-hearted bingo game made for corporate video meetings.", language: "Meeting game", href: "https://github.com/arun-ks/CorporateBingo", live: "https://arun-ks.github.io/CorporateBingo/", image: "portfolio/corporate-bingo.png" },
+  { name: "Auto-Join Meetings", description: "Automatically join scheduled Teams or Zoom calls at the right time.", language: "AutoHotkey", href: "https://github.com/arun-ks/AutoJoinTeamsZoom", image: "portfolio/auto-join-meetings.png" },
 ];
 
 export const posts = [
