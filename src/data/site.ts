@@ -137,13 +137,6 @@ export const portfolio = [
   { name: "Auto-Join Meetings", description: "Automatically join scheduled Teams or Zoom calls at the right time.", language: "AutoHotkey", href: "https://github.com/arun-ks/AutoJoinTeamsZoom", image: "portfolio/auto-join-meetings.png" },
 ];
 
-export const posts = [
-  { title: "Telling AI Code Generators ‘Do not generate code yet’", excerpt: "How a short instruction creates room to clarify impact, constrain scope and make better architectural decisions.", date: "18 Aug 2026", href: "https://arunk5.substack.com/p/telling-ai-code-generators-do-not", category: "AI & craft" },
-  { title: "Dear Applicant, ‘we will contact you only if you are shortlisted’", excerpt: "Why automated hiring systems should give applicants the courtesy and closure of a rejection message.", date: "17 Aug 2026", href: "https://arunk5.substack.com/p/dear-applicant-we-will-contact-you", category: "Work" },
-  { title: "Authenticity in Art and AI", excerpt: "Looking through the history of performance and production to understand today’s resistance to AI-generated work.", date: "17 Aug 2026", href: "https://arunk5.substack.com/p/authenticity-in-art-and-ai", category: "AI & society" },
-  { title: "You used vibe coding to make this?", excerpt: "A reflection on authorship, experience and what AI-assisted coding does—and does not—say about the maker.", date: "15 Aug 2026", href: "https://arunk5.substack.com/p/you-used-vibe-coding-to-make-this", category: "Engineering" },
-];
-
 export const certifications = [
   { name: "PRINCE2® Practitioner", href: "https://arun-ks.github.io/cert/?id=PRINCE2%20Practitioner" },
   { name: "Microsoft Azure AI Fundamentals", href: "https://arun-ks.github.io/cert/?id=Azure%20AI%20Fundamentals" },

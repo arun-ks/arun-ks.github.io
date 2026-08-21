@@ -3,6 +3,9 @@ name: Deploy website to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # 10:00 UTC is 18:00 in Malaysia (UTC+8).
+    - cron: "0 10 * * *"
   workflow_dispatch:
 
 permissions:
@@ -24,6 +27,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Refresh Substack article cache
+        run: npm run sync:writing
       - run: npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

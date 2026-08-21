@@ -37,3 +37,10 @@ test("renders twelve compact portfolio cards with local representative visuals",
   assert.equal((html.match(/class="portfolio-live"/g) || []).length, 8);
   assert.match(html, /arun-ks\.github\.io\/CorporateBingo\//);
 });
+
+test("renders cached Substack articles with images and no publication dates", () => {
+  assert.equal((html.match(/class="featured-post reveal"/g) || []).length, 1);
+  assert.equal((html.match(/class="secondary-post reveal"/g) || []).length, 4);
+  assert.doesNotMatch(html, /<time|pubDate|post\.date/);
+  assert.match(html, /Latest article/);
+});

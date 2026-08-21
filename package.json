@@ -6,6 +6,7 @@
     "dev": "node scripts/astro.mjs dev",
     "build": "node scripts/astro.mjs check && node scripts/astro.mjs build",
     "preview": "node scripts/astro.mjs preview",
+    "sync:writing": "node scripts/sync-substack.mjs",
     "test": "npm run build && node --test tests/site.test.mjs"
   },
   "dependencies": {
