@@ -49,6 +49,8 @@
 .portfolio-card-top > p { margin: 3px 0 0; color: var(--cyan); text-transform: uppercase; font-size: 8px; letter-spacing: .14em; text-align: right; }
 #portfolio .portfolio-body { padding: 18px 0 0; display: flex; flex: 1; flex-direction: column; }
 #portfolio .portfolio-body h3 { margin: 0 0 8px; font-size: 17px; line-height: 1.25; }
+#portfolio .portfolio-title-link { transition: color .2s; }
+#portfolio .portfolio-title-link:hover { color: var(--cyan); }
 #portfolio .portfolio-body > span { min-height: 48px; font-size: 11px; line-height: 1.55; }
 #portfolio .portfolio-body > div { margin-top: auto; padding-top: 15px; justify-content: flex-end; gap: 16px; }
 #portfolio .portfolio-body a { font-size: 10px; color: var(--muted); }
@@ -245,6 +247,7 @@
 .secondary-post h3 { margin: 0 0 6px; font: 600 15px/1.3 "Manrope"; }
 .secondary-post div > span { display: -webkit-box; overflow: hidden; color: var(--muted); font-size: 10px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .secondary-post > b { color: var(--cyan); font-weight: 400; }
+.contact-copy { text-align: center; }
 
 @media (max-width: 900px) {
   .writing-layout { grid-template-columns: 1fr; }

@@ -36,6 +36,10 @@ test("renders twelve compact portfolio cards with local representative visuals",
   assert.match(html, /github\.com\/arun-ks\/AutoJoinTeamsZoom/);
   assert.equal((html.match(/class="portfolio-live"/g) || []).length, 8);
   assert.match(html, /arun-ks\.github\.io\/CorporateBingo\//);
+  assert.equal((html.match(/portfolio-primary-link/g) || []).length, 12);
+  assert.equal((html.match(/class="portfolio-title-link"/g) || []).length, 12);
+  assert.match(html, /class="portfolio-title-link" href="https:\/\/arun-ks\.github\.io\/multiple-news-live\//);
+  assert.match(html, /class="portfolio-title-link" href="https:\/\/github\.com\/arun-ks\/ScreenSaverSaver"/);
 });
 
 test("renders cached Substack articles with images and no publication dates", () => {
