@@ -44,11 +44,12 @@
 #portfolio .portfolio-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
 #portfolio .portfolio-card { min-height: 214px; padding: 20px; display: flex; flex-direction: column; border-radius: 2px; }
 .portfolio-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.portfolio-identity { display: flex; align-items: center; gap: 16px; min-width: 0; }
 #portfolio .portfolio-visual { width: 68px; height: 68px; flex: 0 0 68px; border-radius: 15px; background: var(--bg-soft); }
 #portfolio .portfolio-visual img { width: 100%; height: 100%; object-fit: cover; }
 .portfolio-card-top > p { margin: 3px 0 0; color: var(--cyan); text-transform: uppercase; font-size: 8px; letter-spacing: .14em; text-align: right; }
 #portfolio .portfolio-body { padding: 18px 0 0; display: flex; flex: 1; flex-direction: column; }
-#portfolio .portfolio-body h3 { margin: 0 0 8px; font-size: 17px; line-height: 1.25; }
+#portfolio .portfolio-identity h3 { min-width: 0; margin: 0; font: 700 20px/1.22 "Manrope"; overflow-wrap: anywhere; }
 #portfolio .portfolio-title-link { transition: color .2s; }
 #portfolio .portfolio-title-link:hover { color: var(--cyan); }
 #portfolio .portfolio-body > span { min-height: 48px; font-size: 11px; line-height: 1.55; }
@@ -64,6 +65,7 @@
 @media (max-width: 620px) {
   #portfolio .portfolio-grid { grid-template-columns: 1fr; }
   #portfolio .portfolio-card { min-height: 196px; }
+  #portfolio .portfolio-identity h3 { font-size: 19px; }
 }
 
 .cert-card li {
