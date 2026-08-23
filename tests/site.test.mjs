@@ -44,14 +44,15 @@ test("selected impact is navigable and progressively discloses full project stor
   assert.match(html, /href="#projects">Projects/);
   assert.equal((html.match(/class="project-toggle"/g) || []).length, 4);
   assert.equal((html.match(/class="project-details"/g) || []).length, 4);
-  assert.match(html, /astro-logo\.png/);
-  assert.match(html, /globe-telecom-logo\.png/);
-  assert.match(html, /amdocs-optima\.jpg/);
+  assert.match(html, /astro-logo\.[^"]+\.webp/);
+  assert.match(html, /globe-telecom-logo\.[^"]+\.webp/);
+  assert.match(html, /amdocs-optima\.[^"]+\.webp/);
 });
 
 test("renders twelve compact portfolio cards with local representative visuals", () => {
   assert.equal((html.match(/class="portfolio-card reveal"/g) || []).length, 12);
-  assert.equal((html.match(/\/portfolio\/[^"]+\.png/g) || []).length, 12);
+  assert.equal((html.match(/class="portfolio-visual portfolio-primary-link"[^>]*><img/g) || []).length, 12);
+  assert.equal((html.match(/class="portfolio-visual portfolio-primary-link"[^>]*><img[^>]+loading="lazy"/g) || []).length, 12);
   assert.match(html, /github\.com\/arun-ks\/AutoJoinTeamsZoom/);
   assert.equal((html.match(/class="portfolio-live"/g) || []).length, 8);
   assert.match(html, /arun-ks\.github\.io\/CorporateBingo\//);
