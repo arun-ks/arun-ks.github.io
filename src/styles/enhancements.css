@@ -42,7 +42,9 @@
 }
 
 #portfolio .portfolio-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-#portfolio .portfolio-card { min-height: 214px; padding: 20px; display: flex; flex-direction: column; border-radius: 2px; }
+#portfolio .portfolio-card { min-height: 214px; padding: 20px; display: flex; flex-direction: column; border-radius: 2px; transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease; }
+#portfolio .portfolio-card:hover,
+#portfolio .portfolio-card:focus-within { transform: translateY(-10px); border-color: color-mix(in srgb,var(--cyan) 48%,var(--line)); box-shadow: 0 30px 70px rgba(0,0,0,.28); }
 .portfolio-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .portfolio-identity { display: flex; align-items: center; gap: 16px; min-width: 0; }
 #portfolio .portfolio-visual { width: 68px; height: 68px; flex: 0 0 68px; border-radius: 15px; background: var(--bg-soft); }
@@ -66,6 +68,11 @@
   #portfolio .portfolio-grid { grid-template-columns: 1fr; }
   #portfolio .portfolio-card { min-height: 196px; }
   #portfolio .portfolio-identity h3 { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #portfolio .portfolio-card:hover,
+  #portfolio .portfolio-card:focus-within { transform: none; }
 }
 
 .cert-card li {
