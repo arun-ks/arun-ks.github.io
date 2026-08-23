@@ -76,7 +76,7 @@ export const roles = [
     tags: ["Engineering Management", "Private Cloud", "FinTech", "CI/CD"],
   },
   {
-    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-2005.png", location: "Global assignments", period: "Jul 2006 — Feb 2014", title: "Solution Architect / Project Manager (Expert)",
+    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-2005.png", location: "Limassol, Cyprus", period: "Jul 2006 — Feb 2014", title: "Solution Architect / Project Manager (Expert)",
     summary: "Guided critical international programmes while combining solution architecture, customer engagement, pre-sales and delivery leadership.",
     bullets: [
       "Guided critical programmes for Vodafone, AT&T, Sprint, Telefónica, Telkomcel, U.S. Cellular and other global operators.",
@@ -90,7 +90,7 @@ export const roles = [
     tags: ["Solution Architecture", "Project Management", "Pre-sales", "M&A"],
   },
   {
-    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-1998.png", location: "Global assignments", period: "Oct 2002 — Aug 2006", title: "Team Leader",
+    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-1998.png", location: "Limassol, Cyprus", period: "Oct 2002 — Aug 2006", title: "Team Leader",
     summary: "Led international software-delivery teams across the complete lifecycle for telecom operators in Europe, Asia and the Americas.",
     bullets: [
       "Led and supported projects in China, Indonesia, the United States, Dominican Republic, Norway, Denmark, Spain, Germany, Greece, Romania and the Netherlands.",
@@ -102,7 +102,7 @@ export const roles = [
     tags: ["Team Leadership", "Global Delivery", "Telecom", "Agile"],
   },
   {
-    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-1998.png", location: "Global assignments", period: "Jul 1998 — Sep 2002", title: "Software Engineer",
+    company: "Amdocs", companyUrl: "https://www.amdocs.com/", logo: "amdocs-1998.png", location: "Limassol, Cyprus", period: "Jul 1998 — Sep 2002", title: "Software Engineer",
     summary: "Built the engineering foundations of my career across message acquisition, GSM roaming and production automation.",
     bullets: [
       "Designed and implemented systems for message-acquisition applications.",
