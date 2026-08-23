@@ -6,6 +6,25 @@ import posts from "../data/substack-posts.json";
 const base = import.meta.env.BASE_URL;
 const resumeUrl = `${base}Arun-K-Sivanandan-CV.pdf`;
 const ogUrl = new URL(`${base}og.png`, Astro.site);
+const canonicalUrl = new URL("/", Astro.site);
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  url: canonicalUrl.href,
+  name: "Arun K Sivanandan | CTO & Technology Leader | AI, Cloud & Telecom",
+  mainEntity: {
+    "@type": "Person",
+    name: "Arun K Sivanandan",
+    url: canonicalUrl.href,
+    image: new URL(`${base}arun-k-sivanandan.jpg`, Astro.site).href,
+    email: "mailto:arun.k.s@hotmail.com",
+    sameAs: [
+      "https://www.linkedin.com/in/arunksivanandan/",
+      "https://github.com/arun-ks",
+      "https://arunk5.substack.com/",
+    ],
+  },
+};
 const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 const umamiScriptUrl = import.meta.env.PUBLIC_UMAMI_SCRIPT_URL || "https://cloud.umami.is/script.js";
 const [featuredPost, ...secondaryPosts] = posts;
@@ -16,15 +35,18 @@ const [featuredPost, ...secondaryPosts] = posts;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Technology leader with 28 years across AI, cloud, telecom delivery, solution architecture and engineering management." />
+    <meta name="keywords" content="Arun K Sivanandan, Arun Sivanandan Malaysia, CTO Malaysia, technology leader Malaysia, AI leadership, cloud transformation, telecom technology leader, 5G delivery, solution architecture, engineering leadership, programme delivery, Amdocs, Openet, Sentient Aura" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#071116" />
-    <meta property="og:title" content="Arun K Sivanandan — Technology Leader" />
+    <meta property="og:title" content="Arun K Sivanandan | CTO & Technology Leader | AI, Cloud & Telecom" />
     <meta property="og:description" content="Technology leadership across AI, cloud transformation and telecom at scale." />
-    <meta property="og:type" content="website" /><meta property="og:image" content={ogUrl} />
-    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Arun K Sivanandan — Technology Leader" />
+    <meta property="og:type" content="profile" /><meta property="og:url" content={canonicalUrl} /><meta property="og:image" content={ogUrl} /><meta property="og:image:alt" content="Arun K Sivanandan — CTO and technology leader" />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content="Arun K Sivanandan | CTO & Technology Leader | AI, Cloud & Telecom" />
     <meta name="twitter:description" content="Technology leadership across AI, cloud transformation and telecom at scale." /><meta name="twitter:image" content={ogUrl} />
-    <link rel="icon" href={`${base}favicon.svg`} /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="canonical" href={canonicalUrl} /><link rel="icon" href={`${base}favicon.svg`} /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>Arun K Sivanandan — Technology Leader</title>
+    <title>Arun K Sivanandan | CTO & Technology Leader | AI, Cloud & Telecom</title>
+    <script type="application/ld+json" set:html={JSON.stringify(profileSchema)}></script>
     <script is:inline>(() => { const saved = localStorage.getItem("aks-theme"); const theme = saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; })();</script>
     {umamiWebsiteId && <script is:inline defer src={umamiScriptUrl} data-website-id={umamiWebsiteId} data-domains="arun-ks.github.io" data-do-not-track="true" data-exclude-search="true"></script>}
   </head>

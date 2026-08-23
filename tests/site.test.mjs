@@ -16,6 +16,25 @@ test("includes accessible theme control and social metadata", () => {
   assert.match(html, /property="og:image"/);
 });
 
+test("includes canonical crawl and personal identity metadata", () => {
+  assert.match(html, /<title>Arun K Sivanandan \| CTO & Technology Leader \| AI, Cloud & Telecom<\/title>/);
+  assert.match(html, /rel="canonical" href="https:\/\/arun-ks\.github\.io\/"/);
+  assert.match(html, /name="keywords"/);
+  assert.match(html, /type="application\/ld\+json"/);
+  assert.match(html, /"@type":"ProfilePage"/);
+  assert.match(html, /"@type":"Person"/);
+  assert.match(html, /linkedin\.com\/in\/arunksivanandan/);
+});
+
+test("publishes crawler discovery and Search Console verification files", async () => {
+  const robots = await readFile(new URL("../dist/robots.txt", import.meta.url), "utf8");
+  const sitemap = await readFile(new URL("../dist/sitemap.xml", import.meta.url), "utf8");
+  const verification = await readFile(new URL("../dist/google8bc686f77b1053cf.html", import.meta.url), "utf8");
+  assert.match(robots, /Sitemap: https:\/\/arun-ks\.github\.io\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/arun-ks\.github\.io\/<\/loc>/);
+  assert.match(verification, /google-site-verification: google8bc686f77b1053cf\.html/);
+});
+
 test("uses root-relative resume and asset links", () => {
   assert.match(html, /\/Arun-K-Sivanandan-CV\.pdf/);
   assert.match(html, /\/og\.png/);
