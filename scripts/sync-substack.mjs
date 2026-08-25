@@ -55,5 +55,6 @@ try {
   console.log(`Cached ${posts.length} Substack articles.`);
 } catch (error) {
   if (!(await cachedPostsExist())) throw error;
+  if (process.env.SUBSTACK_SYNC_STRICT === "true") throw error;
   console.warn(`Substack refresh failed; using the existing cache. ${error.message}`);
 }
