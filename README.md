@@ -1,4 +1,4 @@
-# Arun K Sivanandan — Personal Website
+# Arun K Sivanandan - Personal Website
 
 A fast, accessible personal website built with Astro and deployed through GitHub Pages.
 
@@ -39,7 +39,7 @@ To refresh and deploy directly from GitHub:
 4. Select the `main` branch and confirm **Run workflow**.
 5. Wait for both the build and deploy jobs to complete.
 
-The manually triggered workflow retrieves the current RSS feed before building and deploying the website. It does not commit the refreshed JSON cache back to the repository; the cache in the deployment artifact is updated for the published site.
+Scheduled and manually triggered workflows retrieve the current RSS feed, commit a changed `src/data/substack-posts.json` cache back to `main`, then build and deploy the website. If the RSS refresh fails during either of these runs, the workflow fails visibly instead of silently committing stale data. Ordinary push-triggered deployments retain the last successful cache if Substack is temporarily unavailable.
 
 ## Anonymous visitor analytics
 
