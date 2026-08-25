@@ -91,4 +91,6 @@ test("scheduled Substack refreshes are strict and committed", () => {
   assert.match(deployWorkflow, /git add src\/data\/substack-posts\.json/);
   assert.match(deployWorkflow, /git push origin HEAD:main/);
   assert.match(substackSync, /SUBSTACK_SYNC_STRICT === "true"/);
+  assert.match(substackSync, /api\/v1\/archive/);
+  assert.match(substackSync, /trying archive API/);
 });
