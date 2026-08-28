@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 const html = await readFile(new URL("../dist/index.html", import.meta.url), "utf8");
 const deployWorkflow = await readFile(new URL("../.github/workflows/deploy-pages.yml", import.meta.url), "utf8");
 const substackSync = await readFile(new URL("../scripts/sync-substack.mjs", import.meta.url), "utf8");
+const localSubstackUpdater = await readFile(new URL("../scripts/sync-substack-and-push.sh", import.meta.url), "utf8");
 
 test("renders core personal site sections", () => {
   for (const id of ["about", "journey", "projects", "portfolio", "writing", "credentials", "contact"]) {
@@ -85,11 +86,13 @@ test("includes anonymous analytics event hooks", () => {
   }
 });
 
-test("scheduled Substack refreshes are strict and committed", () => {
-  assert.match(deployWorkflow, /contents: write/);
-  assert.match(deployWorkflow, /Commit refreshed Substack cache/);
-  assert.match(deployWorkflow, /git add src\/data\/substack-posts\.json/);
-  assert.match(deployWorkflow, /git push origin HEAD:main/);
+test("local Substack refreshes are strict and trigger deployment by push", () => {
+  assert.match(deployWorkflow, /contents: read/);
+  assert.doesNotMatch(deployWorkflow, /schedule:/);
+  assert.doesNotMatch(deployWorkflow, /sync:writing/);
+  assert.match(localSubstackUpdater, /SUBSTACK_SYNC_STRICT=true npm run sync:writing/);
+  assert.match(localSubstackUpdater, /git add -- "\$cache_file"/);
+  assert.match(localSubstackUpdater, /git push origin main/);
   assert.match(substackSync, /SUBSTACK_SYNC_STRICT === "true"/);
   assert.match(substackSync, /api\/v1\/archive/);
   assert.match(substackSync, /trying archive API/);
