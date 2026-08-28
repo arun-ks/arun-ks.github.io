@@ -271,6 +271,13 @@
   text-align: center;
 }
 
+.icon-link svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  fill: currentColor;
+}
+
 @media (max-width: 900px) {
   .writing-layout { grid-template-columns: 1fr; }
 }
