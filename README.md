@@ -17,12 +17,37 @@ Run `npm test` for a production build and structural checks.
 
 ## Refresh Substack articles
 
-The Writing section is refreshed automatically from `https://arunk5.substack.com/feed` every day at 6:00 PM Malaysia time. The latest five articles are cached in `src/data/substack-posts.json`; if Substack is temporarily unavailable, the website continues to build using the last successful cache.
+The Writing section is refreshed from `https://arunk5.substack.com/feed` by a local Windows scheduled task every day at 6:17 PM Malaysia time. The latest five articles are cached in `src/data/substack-posts.json`; GitHub Pages builds use the last cache committed to `main` and do not contact Substack.
 
 To refresh the cache manually on your computer, run:
 
 ```sh
 npm run sync:writing
+```
+
+From Cygwin, the following command performs the complete update: it pulls `main`, refreshes the cache, runs the tests, and commits and pushes the cache only when it changed.
+
+```sh
+./scripts/sync-substack-and-push.sh
+```
+
+The updater refuses to run outside `main` or when the cache already contains uncommitted changes.
+
+### Register the daily Windows task
+
+Open Windows PowerShell in the repository and run this once under the same Windows account used for Cygwin and GitHub:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\register-substack-task.ps1
+```
+
+This registers **Arun KS - Refresh Substack posts** for 6:17 PM daily using `C:\cygwin64\bin\bash.exe`. The task starts when possible after a missed start, but it runs only while the Windows account is logged on. Git authentication used by Cygwin must already work without an interactive password prompt.
+
+To test it immediately:
+
+```powershell
+Start-ScheduledTask -TaskName "Arun KS - Refresh Substack posts"
+Get-ScheduledTaskInfo -TaskName "Arun KS - Refresh Substack posts"
 ```
 
 Review `src/data/substack-posts.json`, then build and test the refreshed site:
@@ -31,7 +56,7 @@ Review `src/data/substack-posts.json`, then build and test the refreshed site:
 npm test
 ```
 
-To refresh and deploy directly from GitHub:
+To rebuild and deploy the cache currently committed to GitHub:
 
 1. Open the repository's **Actions** tab.
 2. Select **Deploy website to GitHub Pages**.
@@ -39,7 +64,7 @@ To refresh and deploy directly from GitHub:
 4. Select the `main` branch and confirm **Run workflow**.
 5. Wait for both the build and deploy jobs to complete.
 
-Scheduled and manually triggered workflows retrieve the current RSS feed, commit a changed `src/data/substack-posts.json` cache back to `main`, then build and deploy the website. If the RSS refresh fails during either of these runs, the workflow fails visibly instead of silently committing stale data. Ordinary push-triggered deployments retain the last successful cache if Substack is temporarily unavailable.
+GitHub workflows build and deploy the cache already committed to `main`. The local scheduled task owns the RSS retrieval and pushes a cache commit when new articles are found; that push automatically triggers deployment.
 
 ## Anonymous visitor analytics
 
