@@ -57,7 +57,7 @@ test("renders twelve compact portfolio cards with local representative visuals",
   assert.equal((html.match(/class="portfolio-visual portfolio-primary-link"[^>]*><img/g) || []).length, 12);
   assert.equal((html.match(/class="portfolio-visual portfolio-primary-link"[^>]*><img[^>]+loading="lazy"/g) || []).length, 12);
   assert.match(html, /github\.com\/arun-ks\/AutoJoinTeamsZoom/);
-  assert.equal((html.match(/class="portfolio-live"/g) || []).length, 8);
+  assert.equal((html.match(/class="portfolio-live"/g) || []).length, 9);
   assert.match(html, /arun-ks\.github\.io\/CorporateBingo\//);
   assert.equal((html.match(/portfolio-primary-link/g) || []).length, 12);
   assert.equal((html.match(/class="portfolio-title-link"/g) || []).length, 12);
