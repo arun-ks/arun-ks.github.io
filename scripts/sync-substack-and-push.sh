@@ -5,6 +5,8 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cache_file="src/data/substack-posts.json"
 
+echo Latest tile before sync: `cat src/data/substack-posts.json | jq ".[0].title"`
+
 cd "$repo_root"
 
 if [[ "$(git branch --show-current)" != "main" ]]; then
@@ -25,6 +27,8 @@ if git diff --quiet -- "$cache_file"; then
   echo "Substack article cache is already current."
   exit 0
 fi
+
+echo Latest tile after sync: `cat src/data/substack-posts.json | jq ".[0].title"`
 
 npm test
 git add -- "$cache_file"
