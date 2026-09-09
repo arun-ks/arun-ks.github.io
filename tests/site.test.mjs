@@ -86,14 +86,15 @@ test("includes anonymous analytics event hooks", () => {
   }
 });
 
-test("local Substack refreshes are strict and trigger deployment by push", () => {
-  assert.match(deployWorkflow, /contents: read/);
-  assert.doesNotMatch(deployWorkflow, /schedule:/);
-  assert.doesNotMatch(deployWorkflow, /sync:writing/);
+test("scheduled Substack refreshes are strict and committed", () => {
+  assert.match(deployWorkflow, /cron: "17 10 \* \* \*"/);
+  assert.match(deployWorkflow, /contents: write/);
+  assert.match(deployWorkflow, /SUBSTACK_SYNC_STRICT: "true"/);
+  assert.match(deployWorkflow, /git add src\/data\/substack-posts\.json/);
+  assert.match(deployWorkflow, /git push origin HEAD:main/);
   assert.match(localSubstackUpdater, /SUBSTACK_SYNC_STRICT=true npm run sync:writing/);
-  assert.match(localSubstackUpdater, /git add -- "\$cache_file"/);
-  assert.match(localSubstackUpdater, /git push origin main/);
   assert.match(substackSync, /SUBSTACK_SYNC_STRICT === "true"/);
+  assert.match(substackSync, /api\.rss2json\.com/);
   assert.match(substackSync, /api\/v1\/archive/);
-  assert.match(substackSync, /trying archive API/);
+  assert.match(substackSync, /trying RSS proxy/);
 });

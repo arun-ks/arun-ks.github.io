@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const feedUrl = "https://arunk5.substack.com/feed";
 const archiveUrl = "https://arunk5.substack.com/api/v1/archive?sort=new&search=&offset=0&limit=5";
+const rssProxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
 const cacheUrl = new URL("../src/data/substack-posts.json", import.meta.url);
 const requestHeaders = {
   "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36",
@@ -81,15 +82,43 @@ const fetchArchivePosts = async () => {
   return posts;
 };
 
+const fetchProxyPosts = async () => {
+  const response = await fetch(rssProxyUrl, { headers: requestHeaders });
+  if (!response.ok) throw new Error(`RSS proxy returned HTTP ${response.status}`);
+
+  const payload = await response.json();
+  if (payload.status !== "ok" || !Array.isArray(payload.items)) {
+    throw new Error("RSS proxy returned an invalid response");
+  }
+
+  const posts = payload.items
+    .slice(0, 5)
+    .map((post) => ({
+      title: textContent(post.title),
+      excerpt: textContent(post.description),
+      href: post.link || "",
+      image: decodeEntities(post.enclosure?.link || post.thumbnail || ""),
+    }))
+    .filter((post) => post.title && post.href.startsWith("https://arunk5.substack.com/"));
+
+  if (posts.length === 0) throw new Error("RSS proxy contained no usable posts");
+  return posts;
+};
+
 const fetchLatestPosts = async () => {
   try {
     return await fetchRssPosts();
   } catch (rssError) {
-    console.warn(`Substack RSS unavailable; trying archive API. ${rssError.message}`);
+    console.warn(`Substack RSS unavailable; trying RSS proxy. ${rssError.message}`);
     try {
-      return await fetchArchivePosts();
-    } catch (archiveError) {
-      throw new Error(`${rssError.message}; ${archiveError.message}`);
+      return await fetchProxyPosts();
+    } catch (proxyError) {
+      console.warn(`RSS proxy unavailable; trying archive API. ${proxyError.message}`);
+      try {
+        return await fetchArchivePosts();
+      } catch (archiveError) {
+        throw new Error(`${rssError.message}; ${proxyError.message}; ${archiveError.message}`);
+      }
     }
   }
 };

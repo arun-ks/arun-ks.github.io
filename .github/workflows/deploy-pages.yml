@@ -3,10 +3,13 @@ name: Deploy website to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # 10:17 UTC is 18:17 in Malaysia (UTC+8).
+    - cron: "17 10 * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,6 +30,23 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Refresh Substack article cache
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        env:
+          SUBSTACK_SYNC_STRICT: "true"
+        run: npm run sync:writing
+      - name: Commit refreshed Substack cache
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if git diff --quiet -- src/data/substack-posts.json; then
+            echo "Substack cache is already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/substack-posts.json
+          git commit -m "Refresh Substack article cache"
+          git push origin HEAD:main
       - run: npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

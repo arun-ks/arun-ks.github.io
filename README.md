@@ -17,7 +17,7 @@ Run `npm test` for a production build and structural checks.
 
 ## Refresh Substack articles
 
-The Writing section is refreshed from `https://arunk5.substack.com/feed` by a local Windows scheduled task every day at 6:17 PM Malaysia time. The latest five articles are cached in `src/data/substack-posts.json`; GitHub Pages builds use the last cache committed to `main` and do not contact Substack.
+The Writing section is refreshed by GitHub Actions every day at 6:17 PM Malaysia time. The sync tries the Substack feed directly, uses an RSS proxy if GitHub's runner is blocked, and retains the archive API as a final fallback. The latest five articles are cached in `src/data/substack-posts.json`.
 
 To refresh the cache manually on your computer, run:
 
@@ -33,23 +33,6 @@ From Cygwin, the following command performs the complete update: it pulls `main`
 
 The updater refuses to run outside `main` or when the cache already contains uncommitted changes.
 
-### Register the daily Windows task
-
-Open Windows PowerShell in the repository and run this once under the same Windows account used for Cygwin and GitHub:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\register-substack-task.ps1
-```
-
-This registers **Arun KS - Refresh Substack posts** for 6:17 PM daily using `C:\cygwin64\bin\bash.exe`. The task starts when possible after a missed start, but it runs only while the Windows account is logged on. Git authentication used by Cygwin must already work without an interactive password prompt.
-
-To test it immediately:
-
-```powershell
-Start-ScheduledTask -TaskName "Arun KS - Refresh Substack posts"
-Get-ScheduledTaskInfo -TaskName "Arun KS - Refresh Substack posts"
-```
-
 Review `src/data/substack-posts.json`, then build and test the refreshed site:
 
 ```sh
@@ -64,7 +47,7 @@ To rebuild and deploy the cache currently committed to GitHub:
 4. Select the `main` branch and confirm **Run workflow**.
 5. Wait for both the build and deploy jobs to complete.
 
-GitHub workflows build and deploy the cache already committed to `main`. The local scheduled task owns the RSS retrieval and pushes a cache commit when new articles are found; that push automatically triggers deployment.
+Scheduled and manually triggered GitHub workflows refresh the RSS cache, commit it when changed, then build and deploy the website. The local shell script remains available as a manual backup.
 
 ## Anonymous visitor analytics
 
