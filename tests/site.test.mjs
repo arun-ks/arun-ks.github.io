@@ -90,6 +90,9 @@ test("scheduled Substack refreshes are strict and committed", () => {
   assert.match(deployWorkflow, /cron: "17 10 \* \* \*"/);
   assert.match(deployWorkflow, /contents: write/);
   assert.match(deployWorkflow, /SUBSTACK_SYNC_STRICT: "true"/);
+  assert.match(deployWorkflow, /continue-on-error: true/);
+  assert.match(deployWorkflow, /steps\.substack-sync\.outcome == 'success'/);
+  assert.match(deployWorkflow, /deploying the last committed article cache/);
   assert.match(deployWorkflow, /git add src\/data\/substack-posts\.json/);
   assert.match(deployWorkflow, /git push origin HEAD:main/);
   assert.match(localSubstackUpdater, /SUBSTACK_SYNC_STRICT=true npm run sync:writing/);

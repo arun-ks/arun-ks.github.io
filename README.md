@@ -47,7 +47,7 @@ To rebuild and deploy the cache currently committed to GitHub:
 4. Select the `main` branch and confirm **Run workflow**.
 5. Wait for both the build and deploy jobs to complete.
 
-Scheduled and manually triggered GitHub workflows refresh the RSS cache, commit it when changed, then build and deploy the website. The local shell script remains available as a manual backup.
+Scheduled and manually triggered GitHub workflows refresh the RSS cache, commit it when changed, then build and deploy the website. If every remote feed source is temporarily unavailable, the workflow reports a warning and deploys the last committed cache instead of failing the site deployment. The local shell script remains available as a manual backup.
 
 ## Anonymous visitor analytics
 

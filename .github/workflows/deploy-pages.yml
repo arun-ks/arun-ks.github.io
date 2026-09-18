@@ -31,12 +31,14 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Refresh Substack article cache
+        id: substack-sync
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
         env:
           SUBSTACK_SYNC_STRICT: "true"
         run: npm run sync:writing
       - name: Commit refreshed Substack cache
-        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.substack-sync.outcome == 'success'
         run: |
           if git diff --quiet -- src/data/substack-posts.json; then
             echo "Substack cache is already current."
@@ -47,6 +49,12 @@ jobs:
           git add src/data/substack-posts.json
           git commit -m "Refresh Substack article cache"
           git push origin HEAD:main
+      - name: Report cached Substack fallback
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.substack-sync.outcome == 'failure'
+        run: |
+          echo "::warning::Substack refresh failed; deploying the last committed article cache."
+          echo "### Substack refresh warning" >> "$GITHUB_STEP_SUMMARY"
+          echo "The live site was deployed with the last committed article cache because all remote feed sources were temporarily unavailable." >> "$GITHUB_STEP_SUMMARY"
       - run: npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
